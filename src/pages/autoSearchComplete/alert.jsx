@@ -10,8 +10,9 @@ export default function Alert(props){
             <div className='h4 text-center'>alert</div>
             <div className='h5'>type or select correct location name</div>
             <div className='d-flex justify-content-between'>
-            <button className='btn btn-warning ' onClick={ok}>ok</button>
-            <button className='btn btn-warning' onClick={clear}>clear</button>
-        </div></div>
+                <button className='btn btn-warning ' onClick={ok}>ok</button>
+                <button className='btn btn-warning' onClick={clear}>clear</button>
+            </div>
+        </div>
     )
 }

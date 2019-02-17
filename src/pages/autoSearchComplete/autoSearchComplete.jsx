@@ -5,6 +5,7 @@ import Forecast from '../widgets/forecastWeather';
 import GoogleMap from '../widgets/googleMap'
 import Alert from './alert'
 import moment from 'moment'
+import axios from 'axios'
 const API_Key = '2e46c90e0de84f11b2982226191302';
 export default class Weather extends React.Component{
     constructor(){
@@ -25,6 +26,31 @@ export default class Weather extends React.Component{
             days:1,        
             isError:false,
         }
+    }
+    currentLocation =()=>{
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position)=>{
+                var coords = position.coords;
+                axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.latitude},${coords.longitude}&key=AIzaSyC0W_7Xof88qi51CnXgWEJVSOxyJFeKzME`)
+                .then(response=>{return response.data})
+                .then(response=>{ 
+                    return response.results[0].address_components})
+                .then(response=>{
+                    
+                    response.map(item=>{
+                        if(item.types[0] === "administrative_area_level_2"){
+                            this.setState({
+                                search : item.short_name,
+                                autoSearch:{
+                                    input: item.short_name
+                                }
+                            })
+                            return 
+                        }
+                    })
+                })
+            });
+          } 
     }
     select = (item) =>{
         this.state.autoSearch.predictions.map(i=>{
@@ -118,8 +144,11 @@ export default class Weather extends React.Component{
     }
     render(){
         return(
-        <div className='border border-black container rounded mt-2  p-4 bg-primary text-white' >  
-            <h4 className=''>Weather App</h4>
+        <div className='border border-black container rounded mt-2  p-4 bg-primary text-white' > 
+            <div className='row p-2'>
+                <h4 className=''>Weather App</h4>
+                <button className="btn btn-light w-10 ml-2 " onClick={this.currentLocation} >current location</button>
+            </div> 
             <div className='row position-relative'>
                 <input className="col-md-8 form-control" type="text" value={this.state.autoSearch.input} onChange={this.handleChange} placeholder="Enter Location"/>
                 <div className='col-md-4 d-flex justify-content-around mt-1 mt-md-0'>

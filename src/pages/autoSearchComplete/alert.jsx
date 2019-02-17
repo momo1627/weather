@@ -6,7 +6,7 @@ export default function Alert(props){
         props.clear()
     }
     return(
-        <div className='position-absolute border border-primary bg-danger border rounded border-danger p-3' style={{'z-index':'1001'}}>
+        <div className='position-absolute border border-primary bg-danger border rounded border-danger p-3' style={{'zIndex':'1001'}}>
             <div className='h4 text-center'>alert</div>
             <div className='h5'>type or select correct location name</div>
             <div className='d-flex justify-content-between'>

@@ -131,11 +131,13 @@ export default class Weather extends React.Component{
             <div className='w-80'>
                 {this.state.autoSearch.isPredicting  &&  <Predictions  {...this.state.autoSearch} select={this.select}/>}
             </div>
-            <div className='row mt-1' style={{'height':'300px'}}>
+            <div className='row mt-1 align-items-center' >
                 <Current {...this.state.currentWeather} localtime={this.state.localtime}  />
-                <GoogleMap address={this.state.search}/>
-            </div>
-            <div className='row mt-2 bg-secondary border rounded' >
+                <div className='col-md-4 p-1' style={{'height':'160px'}} >
+                    <GoogleMap address={this.state.search}/>
+                </div>
+                <div className='col-md-12 mt-2 bg-secondary border rounded' >
+                <div className='row'>
                 <form action="" className='col-md-2' >
                     <label >Select future days</label>
                     <select  className='form-control form-control-sm' name="days" id="" onChange={this.handleSelect}>
@@ -147,7 +149,11 @@ export default class Weather extends React.Component{
                     </select>
                 </form>
                 <Forecast {...this.state.foreCastWeather} days={this.state.days} />
+                </div>
             </div>
+            </div>
+
+            
         </div>
         )        
     }

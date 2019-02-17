@@ -57,12 +57,10 @@ class GoogleMap extends React.PureComponent {
 
   render() {
     return (
-      <div className='col-md-4 h-100'>
         <div
         ref={this.updateMapContainerRef}
-        className='w-100 h-100'
+        className='w-80 h-100 border rounded'
         />
-      </div>
       
     );
   }

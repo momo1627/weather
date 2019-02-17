@@ -10,7 +10,7 @@ export default function Prediction(props){
         )
     })
     return (
-        <div className='position-absolute list-group t-2' style={{'z-index':'1000'}}>
+        <div className='position-absolute list-group t-2' style={{'zIndex':'1000'}}>
             {elements}
         </div>
         

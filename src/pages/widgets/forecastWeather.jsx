@@ -17,7 +17,7 @@ export default function Forecast(props){
     if (data){
         element = data.map((item)=>{
             return(
-                <div className='col-8 col-sm-4 col-md-3 col-lg-2  col-xl-2 mx-auto m-1  small bg-light text-dark border border-secondary rounded' key={item.date_epoch}>
+                <div className='col-8 col-sm-4 col-lg-2  col-xl-2 mx-auto m-1  small bg-light text-dark border border-secondary rounded' key={item.date_epoch}>
                     <div className='p-1'>{item.date}</div >
                     <img src={item.day.condition.icon} alt=""/>
                     <div className='p-1 h4'>{item.day.avgtemp_c}&#8451;</div >

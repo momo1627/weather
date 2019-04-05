@@ -17,9 +17,8 @@ export default class Weather extends React.Component{
                 predictions : [],
                 isPredicting : false,
             },
-            location:{
-                localtime:'localtime'
-            },
+            location:'location',
+            localtime:'current time',
             currentWeather:{},
             foreCastWeather:{},
             isLoading:false,   
@@ -122,7 +121,8 @@ export default class Weather extends React.Component{
                     foreCastWeather:{
                         ...data.forecast
                     },
-                    localtime:moment(data.location.localtime).format('LLLL')
+                    localtime:moment(data.location.localtime).format('LLLL'),
+                    location:data.location.name,
                 }
                 )
             })
@@ -144,30 +144,30 @@ export default class Weather extends React.Component{
     }
     render(){
         return(
-        <div className='border border-black container rounded mt-2  p-4 bg-primary text-white' > 
+        <div className='border border-black container rounded mt-2  p-4 bg-dark text-white' > 
             <div className='row p-2'>
                 <h4 className=''>Weather App</h4>
                 <button className="btn btn-light w-10 ml-2 " onClick={this.currentLocation} >current location</button>
             </div> 
             <div className='row position-relative'>
-                <input className="col-md-8 form-control" type="text" value={this.state.autoSearch.input} onChange={this.handleChange} placeholder="Enter Location"/>
-                <div className='col-md-4 d-flex justify-content-around mt-1 mt-md-0'>
+                <input className="col-md-8 form-control mb-1" type="text" value={this.state.autoSearch.input} onChange={this.handleChange} placeholder="Enter Location"/>
+                <div className='col-md-4 d-flex justify-content-around mb-1'>
                 <input className="btn btn-success w-50 " type="button" value="Search" onClick={this.handleSubmit} />
                 <input className="btn btn-success w-50 ml-1" type="button" value="Clear" onClick={this.handleClear} />
                 {this.state.isError && <Alert clear={this.handleClear} click={this.handleAlert}/>}
                 </div>
             </div>
-            <div className='w-80'>
+            <div className=''>
                 {this.state.autoSearch.isPredicting  &&  <Predictions  {...this.state.autoSearch} select={this.select}/>}
             </div>
             <div className='row mt-1 align-items-center' >
-                <Current {...this.state.currentWeather} localtime={this.state.localtime}  />
-                <div className='col-md-4 p-1' style={{'height':'160px'}} >
-                    <GoogleMap address={this.state.search}/>
+                <Current {...this.state.currentWeather} localtime={this.state.localtime} location={this.state.location}  />
+                <div className='col-md-4 p-1' style={{'height':'200px'}} >
+                    <GoogleMap address={this.state.search||'Adelaide'}/>
                 </div>
-                <div className='col-md-12 mt-2 bg-secondary border rounded' >
+                <div className='col-md-12 mt-3 alert-secondary border border-light rounded' >
                 <div className='row'>
-                <form action="" className='col-md-2' >
+                <form action="" className='col-md-2 text-dark font-weight-bold' >
                     <label >Select future days</label>
                     <select  className='form-control form-control-sm' name="days" id="" onChange={this.handleSelect}>
                         <option value="1">1</option>
